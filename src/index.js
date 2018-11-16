@@ -1,5 +1,15 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import ReactDom from 'react-dom';
-import App from './components/App';
+import Intro from './components/Intro';
 
-ReactDom.render(<App/>,document.getElementById('app'));
+const App = React.lazy(() => {
+  return new Promise(resolve => setTimeout(resolve, 22000)).then(
+    () => import("./components/App")
+  );
+});
+
+ReactDom.render(
+  <Suspense fallback={<Intro/>}>
+    <App/>
+  </Suspense>
+  ,document.getElementById('app'));
