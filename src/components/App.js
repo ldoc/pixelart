@@ -1,4 +1,6 @@
 import React, {useReducer} from 'react';
+import Container from './Container';
+import Board from './Board';
 
 const initialState = {
   appName: 'PixelArt'
@@ -15,7 +17,9 @@ function reducer(state,action){
 
 function App(){
   const [state, dispatch] = useReducer(reducer, initialState);
-  return <div onClick={() => dispatch({type:'test'})}>{state.appName}</div>;
+  return <Container>
+          <Board/>
+         </Container>;
 }
 
 export default App;

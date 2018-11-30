@@ -3,7 +3,7 @@ import ReactDom from 'react-dom';
 import Intro from './components/Intro';
 
 const App = React.lazy(() => {
-  return new Promise(resolve => setTimeout(resolve, 22000)).then(
+  return new Promise(resolve => setTimeout(resolve, 2000)).then(
     () => import("./components/App")
   );
 });
