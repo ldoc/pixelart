@@ -18,7 +18,7 @@ function reducer(state,action){
 function App(){
   const [state, dispatch] = useReducer(reducer, initialState);
   return <Container>
-          <Board/>
+
          </Container>;
 }
 

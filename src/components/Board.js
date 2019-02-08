@@ -2,10 +2,7 @@ import React, {useRef} from 'react';
 import useSize from '../hooks/useSize';
 import useView from '../hooks/useView';
 
-function Board(){
-  const size = useSize();
-  const ref = useRef();
-  const view = useView(size,ref);
+function Board(props){
 
   function renderGrid() {
     const dims = view.split(' ');
@@ -21,11 +18,13 @@ function Board(){
       ]
     )
   }
-
-  return  <svg ref={ref} viewBox={view}>
-            {renderGrid()}
-            <text x="0" y="15" fill="red">{size.w}</text>
-            <MyComponent/>
+  const vv = props.view.split(' ')
+  console.log(vv)
+  return  <svg viewBox={props.view}>
+            {/* <rect x={vv[0]} y={vv[1]}  width={vv[2]}  height={vv[3]} fill="yellow" ></rect> */}
+            <rect x="-5" y="-5" width="10" height="10" onClick={()=> alert('')}></rect>
+            <rect x="-5" y="-17" width="10" height="10"></rect>
+            <rect x="-5" y="-34" width="10" height="10"></rect>
           </svg>;
 
 };
