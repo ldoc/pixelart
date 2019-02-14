@@ -8,13 +8,15 @@ function Container(props){
   const ref = useRef();
   const view = useView(size,ref);
 
+  const {grid,dispatch} = props;
+
   const stl = {
     width: '100%',
     height: '100%'
   }
 
   return  <svg ref={ref} style={stl}>
-            <Board view={view}/>
+            <Board view={view} grid={grid} dispatch={dispatch}/>
             <circle cx="20" cy="20" r="40" fill="none" stroke="red"></circle>
             {/* <rect x="0" y="0" width="100%" height="100%" fill="gray"></rect> */}
 
