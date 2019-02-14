@@ -9,7 +9,6 @@ const Cell = React.memo((props) => {
       {type: 'setCell', x: x, y: y}
     )
   }
-  console.log('ww')
   return <rect  x={x * size - offsetCenter[0]}
                 y={y * size - offsetCenter[1]}
                 width={size}
