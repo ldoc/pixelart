@@ -1,43 +1,31 @@
 import React from 'react';
 
 const Cell = React.memo((props) => {
-  const {x,y,size,color,offsetCenter,dispatch} = props;
+  const {x,y, px,py,size,color,offsetCenter,dispatch} = props;
 
   function click(){
-    console.log(`${x} - ${y}`)
+    console.log(`${px} - ${py}`)
     dispatch(
       {type: 'setCell', x: x, y: y}
     )
   }
-  return <rect  x={x * size - offsetCenter[0]}
-                y={y * size - offsetCenter[1]}
-                width={size}
-                height={size}
-                fill={color ? color : 'white'}
-                stroke="black"
-                onClick = {click}/>;
+
+  console.log('cell')
+
+  return <g>
+            <rect x={px}
+                  y={py}
+                  width={size}
+                  height={size}
+                  fill={color ? color : 'white'}
+                  stroke="black"
+                  onClick = {click}/>
+            {/* <text x={px + 5} y={py+25}>{`(${px},${py})`}</text> */}
+         </g>;
 },
 (prev, next) => {
- return prev.x == next.x && prev.y == next.y && prev.color == next.color
+ return prev.px == next.px && prev.py == next.py && prev.color == next.color
 });
 
-// function Cell(props){
-//   const {x,y,size,color,offsetCenter,dispatch} = props;
-
-//   function click(){
-//     console.log(`${x} - ${y}`)
-//     dispatch(
-//       {type: 'setCell', x: x, y: y}
-//     )
-//   }
-//   console.log('ww')
-//   return <rect  x={x * size - offsetCenter[0]}
-//                 y={y * size - offsetCenter[1]}
-//                 width={size}
-//                 height={size}
-//                 fill={color ? color : 'white'}
-//                 stroke="black"
-//                 onClick = {click}/>;
-// };
 
 export default Cell;

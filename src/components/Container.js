@@ -18,7 +18,7 @@ function Container(props){
 
   return  <svg ref={ref} style={stl}>
             <Board view={view} grid={grid} dispatch={dispatch}/>
-            <Menu/>
+            <Menu view={view}/>
             {/* <rect x="0" y="0" width="100%" height="100%" fill="gray"></rect> */}
 
           </svg>;
