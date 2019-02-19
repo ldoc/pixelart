@@ -17,10 +17,8 @@ function Container(props){
   }
 
   return  <svg ref={ref} style={stl}>
-            <Board view={view} grid={grid} dispatch={dispatch}/>
-            <Menu view={view}/>
-            {/* <rect x="0" y="0" width="100%" height="100%" fill="gray"></rect> */}
-
+            <Board view={view.viewBox} angle={view.angle} grid={grid} dispatch={dispatch}/>
+            <Menu view={view.viewBox}/>
           </svg>;
 
 }

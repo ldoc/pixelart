@@ -4,28 +4,26 @@ function useView (dim,refParent){
 
   let currentAction = 'NONE';
   let touchesDiff = [];
-  // touchesDiff[1] = {
-  //   x:  0,
-  //   y:  0,
-  //   dx: 1,
-  //   dy: 1
-  // };
+
+  let angle = 0;
   let zoom = 0;
   let pos = [0,0];
 
-  const [viewBox,setViewBox] = useState(getView);
+  const [view,setView] = useState(getView);
 
   function getView(){
     const zx = zoom * dim.w;
     const zy = zoom * dim.h;
-    return `${-dim.w/2 - zx + pos[0]} ${-dim.h/2 - zy + pos[1]} ${dim.w + (2 * zx)} ${dim.h + (2 * zy)}`;
+    return {viewBox:`${-dim.w/2 - zx + pos[0]} ${-dim.h/2 - zy + pos[1]} ${dim.w + (2 * zx)} ${dim.h + (2 * zy)}`, angle: angle};
   }
 
   function updateView(){
-    setViewBox(getView());
+    setView(getView());
   }
 
   function start(e){
+    e.target.addEventListener("touchmove", move);
+    e.target.addEventListener("touchend", end);
     const t = e.changedTouches;
     Object.keys(t).forEach((k) => {
       touchesDiff[t[k].identifier] =  {
@@ -52,6 +50,8 @@ function useView (dim,refParent){
 
   function end(e){
     const t = e.changedTouches;
+    e.target.removeEventListener("touchmove", move);
+    e.target.removeEventListener("touchend", end);
     currentAction = 'NONE';
   }
 
@@ -63,13 +63,18 @@ function useView (dim,refParent){
     updateView();
   }
 
+  function doZoom(e){
+    if(e.altKey) angle += e.wheelDelta > 0 ? 1 : -1;
+    else zoom += e.wheelDelta > 0 ? 0.1 : -0.1;
+    updateView();
+  }
+
   useLayoutEffect(() => {
     refParent.current.ontouchstart = start;
-    refParent.current.ontouchmove = move;
-    refParent.current.ontouchend = end;
+    refParent.current.onmousewheel = doZoom;
   }, []);
 
-  return viewBox;
+  return view;//{viewBox: viewBox, angle: alpha};
 }
 
 export default useView;
