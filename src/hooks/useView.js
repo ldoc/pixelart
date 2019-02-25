@@ -22,6 +22,7 @@ function useView (dim,refParent){
   }
 
   function start(e){
+    console.log('view')
     e.target.addEventListener("touchmove", move);
     e.target.addEventListener("touchend", end);
     const t = e.changedTouches;

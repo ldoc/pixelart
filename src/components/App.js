@@ -4,6 +4,7 @@ import Board from './Board';
 
 const initialState = {
   appName: 'PixelArt',
+  action: 'NONE',
   selectedColor: '550055',
   grid: {
     size: [32,32],
@@ -28,6 +29,8 @@ function reducer(state,action){
       return {...state,appName:'test'}
     case 'setCell':
       return {...state,grid:{...state.grid,cells: state.grid.cells.map(c => (c.x == action.x && c.y == action.y) ? {...c,color:state.selectedColor}  : c)}}
+    case 'setAction':
+      return {...state,action: action.action}
     default:
       return state;
   }
