@@ -6,7 +6,6 @@ function Button(props){
   const {name,px,py,icon,dispatch} = props;
 
   function start(e){
-    console.log('boton')
     setTouch(true);
     e.stopPropagation();
     e.nativeEvent.stopImmediatePropagation();

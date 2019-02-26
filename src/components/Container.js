@@ -3,7 +3,7 @@ import useView from '../hooks/useView';
 import useSize from '../hooks/useSize';
 import Board from './Board';
 import Menu from './Menu';
-// import ColorPicker from './ColorPicker'
+import Intro from './Intro';
 
 function Container(props){
   const size = useSize();
@@ -22,7 +22,7 @@ function Container(props){
   return  <svg ref={ref} style={stl}>
             <Board view={view.viewBox} angle={view.angle} grid={grid} dispatch={dispatch}/>
             <Menu view={view.viewBox} dispatch={dispatch}/>
-            <Suspense>
+            <Suspense fallback={<Intro/>}>
               {action == 'color' ? <ColorPicker/> : null}
             </Suspense>
           </svg>;

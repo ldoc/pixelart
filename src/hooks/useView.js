@@ -1,8 +1,6 @@
 import React, {useState, useLayoutEffect} from 'react';
 
 function useView (dim,refParent){
-
-  let currentAction = 'NONE';
   let touchesDiff = [];
 
   let angle = 0;
@@ -22,7 +20,6 @@ function useView (dim,refParent){
   }
 
   function start(e){
-    console.log('view')
     e.target.addEventListener("touchmove", move);
     e.target.addEventListener("touchend", end);
     const t = e.changedTouches;
@@ -53,7 +50,6 @@ function useView (dim,refParent){
     const t = e.changedTouches;
     e.target.removeEventListener("touchmove", move);
     e.target.removeEventListener("touchend", end);
-    currentAction = 'NONE';
   }
 
   function action(){
