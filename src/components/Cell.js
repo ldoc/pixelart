@@ -4,13 +4,10 @@ const Cell = React.memo((props) => {
   const {x,y, px,py,size,color,offsetCenter,dispatch} = props;
 
   function click(){
-    console.log(`${px} - ${py}`)
     dispatch(
       {type: 'setCell', x: x, y: y}
     )
   }
-
-  console.log('cell')
 
   return <g>
             <rect x={px}
