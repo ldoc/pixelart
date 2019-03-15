@@ -1,6 +1,7 @@
 import React, {useState, useLayoutEffect} from 'react';
 
-function useView (dim,refParent){
+function useView (dim,refParent,action){
+
   let touchesDiff = [];
 
   let angle = 0;
@@ -34,6 +35,7 @@ function useView (dim,refParent){
   }
 
   function move(e){
+
     const t = e.changedTouches;
     Object.keys(t).forEach((k) => {
       touchesDiff[t[k].identifier] =  {
@@ -43,7 +45,7 @@ function useView (dim,refParent){
                                         dy: t[k].clientY - touchesDiff[k].y
                                       };
     })
-    requestAnimationFrame(action);
+    requestAnimationFrame(doAction);
   }
 
   function end(e){
@@ -52,7 +54,7 @@ function useView (dim,refParent){
     e.target.removeEventListener("touchend", end);
   }
 
-  function action(){
+  function doAction(){
     const t = touchesDiff;
     if(t.length == 1) pos = [pos[0] + t[0].dx, pos[1] + t[0].dy];
     else if(t.length == 2) {
@@ -67,11 +69,18 @@ function useView (dim,refParent){
   }
 
   useLayoutEffect(() => {
-    refParent.current.ontouchstart = start;
-    refParent.current.onmousewheel = doZoom;
-  }, []);
+    console.log('>>>' + action)
+    if(action == 'NONE'){
+      console.log(refParent.current.id)
+      document.ontouchstart = start;
+      document.onmousewheel = doZoom;
+    }else{
+      console.log(refParent.current.id)
+      document.removeEventListener("touchstart", start);
+    }
+  }, [action]);
 
-  return view;//{viewBox: viewBox, angle: alpha};
+  return view;
 }
 
 export default useView;

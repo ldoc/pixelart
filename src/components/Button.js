@@ -7,8 +7,6 @@ function Button(props){
 
   function start(e){
     setTouch(true);
-    e.stopPropagation();
-    e.nativeEvent.stopImmediatePropagation();
     dispatch(
       {type: 'setAction', action: name}
     )
@@ -30,8 +28,10 @@ function Button(props){
       y={py}
       width={w}
       height={h}
-      onTouchStart={start}
-      onTouchEnd={end}>
+      onClick= {(e) => touch ? end(e) : start(e)}
+      // onTouchStart={start}
+      // onTouchEnd={end}
+      >
       <g>
         <circle cx={w/2}
                 cy={w/2}

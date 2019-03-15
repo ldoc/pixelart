@@ -6,11 +6,14 @@ import Menu from './Menu';
 import Intro from './Intro';
 
 function Container(props){
-  const size = useSize();
-  const ref = useRef();
-  const view = useView(size,ref);
 
   const {grid,dispatch,action} = props;
+
+  const size = useSize();
+  const ref = useRef();
+  const view = useView(size,ref,action);
+
+
 
   const stl = {
     width: '100%',
